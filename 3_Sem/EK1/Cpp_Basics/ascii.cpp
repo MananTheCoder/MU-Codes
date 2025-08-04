@@ -1,39 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-typedef vector<int> vi;
-typedef map<int, int> mii;
-typedef pair<int, int> pii;
-
-#define forn(i, n) for (int i = 0; i < n; i++)
-#define pb push_back
-
-vi input_vector()
-{
-    int n;
-    cin >> n;
-    vi v(n);
-    forn(i, n)
-    {
-        cin >> v[i];
-    }
-    return v;
-}
-
-void print_vec(vi &v)
-{
-    forn(i, v.size())
-    {
-        cout << v[i] << " ";
-    }
-    cout << "\n";
-}
-
 void solve()
 {
-    // char c = 51;
-    int a = 51;
-    cout << (char)a << "\n";
+    char c = 'a'; // 97
+    // int a = 51;
+    int b = -32;
+    cout << (char)(c + b) << "\n"; // 65
 }
 
 int main()
