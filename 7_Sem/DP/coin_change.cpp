@@ -177,18 +177,18 @@ int so_min_coins(vi &coins, int amt)
     return prev[amt];
 }
 
-int dso_min_coins(vi &coins, int amt)
+int dso_min_coins(vi &coins, int amount)
 { // dso -> double space optimized
     int n = coins.size();
-    vi prev(amt + 1, -1);
-    forn(i, amt + 1)
+    vi prev(amount + 1, -1);
+    forn(i, amount + 1)
     {
-        prev[i] = (i % coins[0] != 0) ? (amt + 1) : (i / coins[0]);
+        prev[i] = (i % coins[0] != 0) ? (amount + 1) : (i / coins[0]);
     }
 
     for (int i = 1; i < n; i++)
     {
-        for (int A = amt; A > 0; A--)
+        for (int A = amount; A > 0; A--)
         {
             if (A % coins[i] == 0)
             {
@@ -204,7 +204,7 @@ int dso_min_coins(vi &coins, int amt)
             prev[A] = min(take, notTake);
         }
     }
-    return prev[amt];
+    return prev[amount];
 }
 
 void solve()
