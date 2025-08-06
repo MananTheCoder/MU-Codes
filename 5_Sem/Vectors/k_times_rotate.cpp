@@ -50,7 +50,7 @@ void rotate_k_times(vi &v, int k) // O(kn)
     }
 }
 
-void rotate_k_times_faster(vi &v, int k) // TC: O(n+k), SC: O(k)
+void rotate_k_times_faster_cw(vi &v, int k) // TC: O(n+k), SC: O(k)
 {
     int n = v.size();
     k %= n;
@@ -75,12 +75,41 @@ void rotate_k_times_faster(vi &v, int k) // TC: O(n+k), SC: O(k)
     }
 }
 
+void rotate_k_times_faster_acw(vi &v, int k)
+{
+    // take backup of front k elements
+
+    // shift last (n-k) elem k place backward
+
+    // insert the backup k elems at back
+}
+
+void rotate_k_times_hybrid(vi &v, int k)
+{
+    int n = v.size();
+    k %= n;
+    if (k > n - k)
+    {
+        rotate_k_times_faster_cw(v, k);
+        return;
+    }
+    rotate_k_times_faster_acw(v, n - k);
+}
+
+void rotate_k_times_fastest(vi &v, int k)
+{
+    k %= v.size();
+    reverse(v.begin(), v.end());
+    reverse(v.begin(), v.begin() + k);
+    reverse(v.begin() + k, v.end());
+}
+
 void solve()
 {
     vector<int> v = input_vi();
     int k;
     cin >> k;
-    rotate_k_times(v, k);
+    rotate_k_times_fastest(v, k);
     print_vi(v);
 }
 
