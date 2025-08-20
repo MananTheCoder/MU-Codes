@@ -19,7 +19,7 @@ bool isPrime_slowest(int n)
             // return false;
         }
     }
-    cout << counter << "\n";
+    // cout << counter << "\n";
     return ans;
 }
 
@@ -71,7 +71,7 @@ bool isPrime_faster(int n)
             // return false;
         }
     }
-    cout << counter << "\n";
+    // cout << counter << "\n";
     return ans;
 }
 
