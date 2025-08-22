@@ -2,6 +2,7 @@
 using namespace std;
 
 typedef vector<int> vi;
+typedef unordered_map<int, int> umii;
 
 #define forn(i, n) for (int i = 0; i < n; i++)
 
@@ -28,18 +29,7 @@ void print_vi(vector<int> v)
     v[0] = 10;
 }
 
-int reverse(int n) // O(log n)
-{
-    int new_n = 0;
-    while (n)
-    {
-        new_n = (new_n * 10) + n % 10;
-        n /= 10;
-    }
-    return new_n;
-}
-
-bool isPrime_flash(long long n) // O(sqrt(n)/2)
+bool isPrime(long long n) // O(sqrt(n)/2)
 {
     if (n < 2)
     {
@@ -69,23 +59,32 @@ bool isPrime_flash(long long n) // O(sqrt(n)/2)
     return ans;
 }
 
-int find_rank(int p) // O(p^1.5), k = 1/2
+void fill_ranks(umii &prime_ranks, int &range) // (range^1.5)/2
 {
-    int rank = 0; // 1
-    forn(i, p)    // p * sqrt(p)/2
+    int rank = 1;
+    for (int i = 2; i <= range; i++) // range * sqrt(range)/2 = range^(1.5)/2
     {
-        if (isPrime_flash(i + 1)) // (sqrt(i)/2)
+        if (isPrime(i)) // sqrt(range)/2
         {
-            rank++; // 1
+            prime_ranks[i] = rank++;
         }
     }
-    return rank; // 1
 }
 
-bool is_interesting(int p1) // O(p1^1.5)
-{                           // p1=37, p2=73 -> false
-                            // p1=73, p2=37 ->true
-    if (!isPrime_flash(p1)) // sqrt(p1)/2
+int reverse(int n) // O(log n)
+{
+    int new_n = 0;
+    while (n)
+    {
+        new_n = (new_n * 10) + n % 10;
+        n /= 10;
+    }
+    return new_n;
+}
+
+bool is_interesting(int p1, umii &prime_ranks) // sqrt(p1)
+{                                              //
+    if (!isPrime(p1))                          // sqrt(p1)/2
     {
         return false;
     }
@@ -94,22 +93,22 @@ bool is_interesting(int p1) // O(p1^1.5)
     {
         return false;
     }
-    if (!isPrime_flash(p2)) // sqrt(p2)/2
+    if (!isPrime(p2)) // sqrt(p2)/2
     {
         return false;
     }
-    int r2 = find_rank(p2);   // (p2^1.5)/2
-    int r1 = reverse(r2);     // log(r2)
-    int rank = find_rank(p1); // (p1^1.5)/2
+    int r2 = prime_ranks[p2];
+    int r1 = reverse(r2); // log(r2)
+    int rank = prime_ranks[p1];
 
     return (r1 == rank) && (p1 > p2);
 }
 
-void print_interesting_list(int range) // range^2.5
+void print_interesting_list(int range, umii &prime_ranks) // range^(1.5)
 {
-    forn(i, range) // range
+    forn(i, range) // range * sqrt(range)
     {
-        if (is_interesting(i + 1)) // x^1.5 <= range^1.5
+        if (is_interesting(i + 1, prime_ranks)) // sqrt(i)
         {
             cout << (i + 1) << "\t";
         }
@@ -117,11 +116,18 @@ void print_interesting_list(int range) // range^2.5
     cout << "\n";
 }
 
+void the_best_number(int &range) // range^(1.5), k=1.5
+{
+    unordered_map<int, int> prime_ranks;
+    fill_ranks(prime_ranks, range);             // x/2
+    print_interesting_list(range, prime_ranks); // x
+}
+
 void solve()
 {
     int range;
     cin >> range;
-    print_interesting_list(range);
+    the_best_number(range);
 }
 
 int main()
