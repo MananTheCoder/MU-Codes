@@ -3,10 +3,12 @@ using namespace std;
 
 class Cars
 {
+private:
+    string color;
+
 public:
     // data members
     string company;
-    string color;
     string model;
     string body_material;
     bool transmission;
@@ -57,6 +59,16 @@ public:
         cout << "The new gear is " << gear << ".\n";
     }
 
+    void setColor(string color)
+    {
+        this->color = color;
+    }
+
+    string getColor()
+    {
+        return this->color;
+    }
+
 private:
     void calculate_mileage(int km, int litres)
     {
@@ -64,24 +76,33 @@ private:
     }
 };
 
-int main()
+void create_Prem_car(Cars &keshvi_car)
 {
-    // Cars *keshvi_car = new Cars();
-    Cars keshvi_car;
-    keshvi_car.color = "Black";
-    keshvi_car.company = "BMW";
-    keshvi_car.seats = 5;
-
-    Cars rudra_car("silver", "toyota", 7, "innova"); //
-    // cout << rudra_car.company << "\n";
-
     // Cars *Prem_car = new Cars(keshvi_car);
     Cars Prem_car(keshvi_car);
     // cout << Prem_car.company << "\n";
     Prem_car.seats = 2;
     Prem_car.model = "M4 Competition";
     Prem_car.body_material = "Carbon";
-    Prem_car.color = "Matt Black";
+    // Prem_car.color = "Matt Black";
+    Prem_car.setColor("Matt Black");
 
-    Prem_car.drive("Prem");
+    // Prem_car.drive("Prem");
+
+    // Prem_car.color = "Grey";
+    cout << Prem_car.getColor() << "\n";
+}
+
+int main()
+{
+    // Cars *keshvi_car = new Cars();
+    Cars keshvi_car;
+    // keshvi_car.color = "Black";
+    // keshvi_car.company = "BMW";
+    // keshvi_car.seats = 5;
+
+    // Cars rudra_car("silver", "toyota", 7, "innova"); //
+    // cout << rudra_car.company << "\n";
+
+    create_Prem_car(keshvi_car);
 }
