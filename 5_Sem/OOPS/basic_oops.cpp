@@ -22,7 +22,7 @@ public:
     Toys(string color, string brand, char grade)
     {
         this->color = color;
-        this->brand = brand;
+        (*this).brand = brand;
         this->grade = grade;
     }
 };
@@ -40,6 +40,7 @@ void playing_with_classes()
 void solve()
 {
     playing_with_classes();
+    // difference between struct and class.
 }
 
 int main()
