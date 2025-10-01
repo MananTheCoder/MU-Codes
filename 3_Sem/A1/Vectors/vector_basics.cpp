@@ -1,50 +1,43 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void arrays()
+vector<int> input_vi()
 {
-    int n = 5;
-    int a[n];
-    for (int i = 0; i <= n - 1; i++)
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    for (int i = 0; i < n; i++)
     {
-        cin >> a[i];
+        cin >> v[i];
     }
-    for (int i = 0; i < 5; i++)
+    return v;
+}
+
+void print_vi(vector<int> &v)
+{
+    for (int x : v)
     {
-        cout << a[i] << " ";
+        cout << x << " ";
     }
     cout << "\n";
 }
 
-int find_vector_sum(vector<int> &v)
+void rotate_vector(vector<int> &v)
 {
-    int sum = 0, n = v.size();
-    v[0] = 9;
-    // for (int i = 0; i < n; i++)
-    // {
-    //     sum += v[i];
-    // }
-    return sum;
-}
-
-void vectors()
-{
-    // STL -> Standard Template Library
-    int n = 5;
-    cin >> n;
-    vector<int> v(n);
-    for (int i = 0; i <= n - 1; i++)
+    int n = v.size();
+    int temp = v[n - 1];
+    for (int i = n - 2; i >= 0; i--)
     {
-        cin >> v[i];
+        v[i + 1] = v[i];
     }
-    int x = find_vector_sum(v);
-    cout << v[0] << "\n";
-    // cout << find_vector_sum(v) << "\n";
+    v[0] = temp;
 }
 
 void solve()
 {
-    vectors();
+    vector<int> v = input_vi();
+    rotate_vector(v);
+    print_vi(v);
 }
 
 int main()
