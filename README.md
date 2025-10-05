@@ -1,2 +1,2 @@
 # MU-Codes
-Codes for 5th Sem students of MU
+Codes for 25-26 Batch students of MU
